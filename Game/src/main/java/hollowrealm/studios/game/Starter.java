@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class Starter {
 
-    public static void main(String[] args) {
-        Engine.initialize(new GameConfig());
+    public static void start(GameConfig config) {
+        Engine.initialize(config);
         Engine.graphicModule.addFrameListener(new FrameListener() {
             @Override
             public void onNextFrame(Graphics2D graphics2D) {
