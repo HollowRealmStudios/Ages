@@ -35,7 +35,7 @@ public class Launcher extends Application {
     public void start(Stage primaryStage) {
         JFXTabPane pane = new JFXTabPane();
         builder.buildGameTab(primaryStage, pane);
-        builder.buildModTab();
+        builder.buildModTab(primaryStage);
         builder.buildSettingsTab();
         pane.getTabs().addAll(builder.getGameTab(), builder.getModTab(), builder.getSettingsTab());
         primaryStage.setTitle("Ages Launcher");

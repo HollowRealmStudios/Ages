@@ -7,15 +7,16 @@ import com.jfoenix.controls.JFXTextField;
 import hollowrealm.studios.game.Starter;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import simple.engine.util.GameConfig;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Objects;
 
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 import static javafx.scene.paint.Color.RED;
@@ -100,8 +101,26 @@ public class Builder {
         settingsTab.setContent(vBox);
     }
 
-    public void buildModTab() {
+    public void buildModTab(Stage stage) {
         modTab.setClosable(false);
+        FlowPane flowPane = new FlowPane();
+        ScrollPane scrollPane = LauncherUtils.usePref(new ScrollPane(), 790);
+        FlowPane scrollingFlowPane = LauncherUtils.usePref(new FlowPane(), 790);
+        JFXButton button = LauncherUtils.usePref(new JFXButton("Select mod folder"), 200,30);
+        JFXTextField path = LauncherUtils.usePref(new JFXTextField(), 600,30);
+        button.setOnAction(actionEvent -> {
+            File f = new DirectoryChooser().showDialog(stage);
+            if (f != null) {
+                path.setText(f.toString());
+                Arrays.stream(Objects.requireNonNull(f.list())).forEach(s -> scrollingFlowPane.getChildren().add(new Label(s)));
+            }
+        });
+        scrollingFlowPane.setVgap(10d);
+        flowPane.setVgap(10d);
+        scrollPane.setContent(scrollingFlowPane);
+        flowPane.getChildren().add(new HBox(path, button));
+        flowPane.getChildren().add(scrollPane);
+        modTab.setContent(flowPane);
     }
 
     public Tab getModTab() {
