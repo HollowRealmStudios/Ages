@@ -32,12 +32,16 @@ public class GameTab extends Tab {
                 Launcher.SETTINGS_TAB.heightField.setBackground(new Background(new BackgroundFill(RED, CornerRadii.EMPTY, Insets.EMPTY)));
                 errored = true;
             } else Launcher.CONFIG.setHeight(Integer.parseInt(Launcher.SETTINGS_TAB.heightField.getText()));
+            if (Launcher.PLUGIN_MANAGER == null) {
+                Launcher.TAB_PANE.getSelectionModel().select(Launcher.MOD_TAB);
+                Launcher.MOD_TAB.scrollPane.setBackground(new Background(new BackgroundFill(RED, CornerRadii.EMPTY, Insets.EMPTY)));
+                errored = true;
+            }
             if (!errored) {
-                Launcher.PLUGIN_MANAGER.getPlugins().forEach(Plugin::start);
                 Launcher.CONFIG.setDefaultVolume((int) Launcher.SETTINGS_TAB.volumeSlider.getValue());
                 ConfigManager.safe(Launcher.CONFIG, new File("Game.config"));
                 stage.close();
-                Starter.start(Launcher.CONFIG);
+                Starter.start(Launcher.CONFIG, Launcher.PLUGIN_MANAGER.getPlugins());
             }
         });
         setContent(launchButton);

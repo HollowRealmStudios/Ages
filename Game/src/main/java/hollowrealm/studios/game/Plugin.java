@@ -1,4 +1,4 @@
-package hollowrealm.studios.launcher;
+package hollowrealm.studios.game;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -21,6 +21,22 @@ public class Plugin {
     private final File folder;
     private String name, author, version, main;
     private Class<?> starter;
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof String) {
+            return o.equals(name);
+        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plugin plugin = (Plugin) o;
+        return name.equals(plugin.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 
     public Plugin(File folder) {
         this.folder = folder;

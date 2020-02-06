@@ -2,11 +2,10 @@ package hollowrealm.studios.launcher;
 
 import javafx.scene.layout.Region;
 import org.apache.commons.io.FilenameUtils;
+import org.javatuples.Pair;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -35,6 +34,12 @@ public class LauncherUtils {
         t.setMaxHeight(USE_PREF_SIZE);
         t.setPrefWidth(width);
         return t;
+    }
+
+    public static <K, V> ArrayList<Pair<K, V>> toTupleList(HashMap<K, V> map) {
+        ArrayList<Pair<K, V>> list = new ArrayList<>();
+        map.forEach((key, value) -> list.add(new Pair<>(key, value)));
+        return list;
     }
 
     public static File[] listJars(File file) {
