@@ -1,8 +1,14 @@
 package hollowrealm.studios.launcher;
 
 import javafx.scene.layout.Region;
+import org.apache.commons.io.FilenameUtils;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
@@ -29,6 +35,11 @@ public class LauncherUtils {
         t.setMaxHeight(USE_PREF_SIZE);
         t.setPrefWidth(width);
         return t;
+    }
+
+    public static File[] listJars(File file) {
+        List<File> files = Arrays.stream(Objects.requireNonNull(file.listFiles())).filter(f -> FilenameUtils.getExtension(f.getName()).equals("jar")).collect(Collectors.toList());
+        return files.toArray(new File[]{});
     }
 
 }
