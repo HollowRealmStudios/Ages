@@ -28,6 +28,7 @@ public class ModTab extends Tab {
         gridPane.setVgap(15d);
         button.setOnAction(actionEvent -> {
             File f = new DirectoryChooser().showDialog(stage);
+            pathField.setText(f.getAbsolutePath());
             Launcher.PLUGIN_MANAGER = new PluginManager(f);
             ArrayList<Plugin> list = Launcher.PLUGIN_MANAGER.getPlugins();
             for (int i = 0; i < list.size(); i++) {
