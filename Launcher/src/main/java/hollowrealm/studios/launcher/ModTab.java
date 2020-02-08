@@ -34,6 +34,7 @@ public class ModTab extends Tab {
             for (int i = 0; i < list.size(); i++) {
                 gridPane.add(new HBox(new Label(list.get(i).getName() + "(" + list.get(i).getAuthor() + ", " + list.get(i).getVersion() + ")")), 0, i + 1);
             }
+            Launcher.TAB_PANE.getSelectionModel().select(Launcher.GAME_TAB);
         });
         scrollPane.setContent(gridPane);
         setContent(scrollPane);
