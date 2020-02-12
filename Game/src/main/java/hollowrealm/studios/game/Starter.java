@@ -6,7 +6,6 @@ import simple.engine.util.GameConfig;
 import simple.engine.util.Logger;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
