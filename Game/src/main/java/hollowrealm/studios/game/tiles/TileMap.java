@@ -40,6 +40,18 @@ public class TileMap {
         }
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
     public CollisionMap createCollisionMap() {
         ArrayList<Rhomb> rhombs = new ArrayList<>();
         for (int z = 0; z < height; z++) {
