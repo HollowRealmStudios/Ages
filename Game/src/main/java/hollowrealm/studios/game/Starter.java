@@ -9,6 +9,7 @@ import simple.engine.util.GameConfig;
 import simple.engine.util.Logger;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Starter {
@@ -21,14 +22,15 @@ public class Starter {
         Logger.disableLevel("fps");
         plugins.forEach(Plugin::start);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> plugins.forEach(Plugin::stop)));
-        map.setTile(new GrassTile(), 0, 0, 0);
-        map.setTile(new GrassTile(), 1, 0, 0);
-        map.setTile(new TestTile(), 0, 1, 0);
-        map.setTile(new TestTile(), 0, 0, 1);
+        BufferedImage[] images = ImageSplitter.split(Engine.storageModule.getImage("Grass.png"));
         Engine.graphicModule.addFrameListener(new FrameListener() {
             @Override
             public void onNextFrame(Graphics2D graphics2D) {
-                map.paint(graphics2D);
+                graphics2D.drawImage(images[0], 0, 0, null);
+                graphics2D.drawImage(images[0], 0, 130, null);
+                graphics2D.drawImage(images[0], 130, 0, null);
+                graphics2D.drawImage(images[0], 130, 130, null);
+
             }
         }, 0);
     }

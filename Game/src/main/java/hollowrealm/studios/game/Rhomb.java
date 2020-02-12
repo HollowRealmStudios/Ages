@@ -24,12 +24,6 @@ public class Rhomb {
     }
 
     public boolean contains(int x, int y) {
-        /*return isInside(new Point[]{
-                new Point(0, (int) (y + height / 2)),
-                new Point((int) (x + width / 2), 0),
-                new Point((int) x + width, (int) (y + height / 2)),
-                new Point((int) (x + width / 2), (int) y + height),
-        }, 4, new Point((int) x, (int) y));*/
         return isInside(new Point[]{
                 new Point(this.x + width / 2, this.y),
                 new Point(this.x + width, this.y + height / 2),
