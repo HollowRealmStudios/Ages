@@ -26,6 +26,5 @@ public class Launcher extends Application {
         primaryStage.setTitle("Ages Launcher");
         primaryStage.setScene(new Scene(TAB_PANE, 800, 600));
         primaryStage.show();
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> PLUGIN_MANAGER.stopPlugins()));
     }
 }
