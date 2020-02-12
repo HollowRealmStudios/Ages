@@ -1,9 +1,11 @@
 package hollowrealm.studios.game.tiles;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Created by matteoschmider on 11.02.20.
  */
-public class TileDepthWrapper {
+public class TileDepthWrapper implements Tile {
     private Tile t;
     private int x, y, z;
 
@@ -28,5 +30,20 @@ public class TileDepthWrapper {
 
     public int getZ() {
         return z;
+    }
+
+    @Override
+    public BufferedImage getTexture() {
+        return t.getTexture();
+    }
+
+    @Override
+    public boolean isPassable() {
+        return t.isPassable();
+    }
+
+    @Override
+    public float getHardness() {
+        return t.getHardness();
     }
 }

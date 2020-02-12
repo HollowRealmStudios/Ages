@@ -4,7 +4,7 @@ import simple.engine.Engine;
 
 import java.awt.image.BufferedImage;
 
-public class BarkTile extends Tile {
+public class BarkTile implements Tile {
 
     @Override
     public BufferedImage getTexture() {

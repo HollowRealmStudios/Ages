@@ -4,7 +4,7 @@ import simple.engine.Engine;
 
 import java.awt.image.BufferedImage;
 
-public class TestTile extends Tile {
+public class TestTile implements Tile {
 
     @Override
     public BufferedImage getTexture() {

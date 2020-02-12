@@ -2,10 +2,10 @@ package hollowrealm.studios.game.tiles;
 
 import java.awt.image.BufferedImage;
 
-public abstract class Tile {
+public interface Tile {
 
-    public abstract BufferedImage getTexture();
-    public abstract boolean isPassable();
-    public abstract float getHardness();
+    BufferedImage getTexture();
+    boolean isPassable();
+    float getHardness();
 
 }
