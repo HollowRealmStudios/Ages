@@ -24,20 +24,16 @@ public class TileMap implements Tile {
         depthList = new ArrayList<TileDepthWrapper>();
     }
 
-    public TileMap(TileMap another) {
-        this.width = another.width;
-        this.height = another.height;
-        this.depth = another.depth;
-        this.tiles = another.tiles;
-        this.depthList = another.depthList;
-    }
-
     private void fillDepthList() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < depth; y++) {
                 for (int z = 0; z < height; z++) {
-                    if (get(x, y, z) != null) {
-                        depthList.add(new TileDepthWrapper(get(x, y, z), x, y, z));
+                    Tile t = get(x, y, z);
+                    if (t != null) {
+                        TileDepthWrapper tdw = new TileDepthWrapper(t, x, y, z);
+                        if (!depthList.contains(tdw)) {
+                            depthList.add(tdw);
+                        }
                     }
                 }
             }

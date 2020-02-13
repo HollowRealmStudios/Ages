@@ -43,6 +43,28 @@ public class TileDepthWrapper implements Tile {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TileDepthWrapper that = (TileDepthWrapper) o;
+
+        if (x != that.x) return false;
+        if (y != that.y) return false;
+        if (z != that.z) return false;
+        return t.equals(that.t);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = t.hashCode();
+        result = 31 * result + x;
+        result = 31 * result + y;
+        result = 31 * result + z;
+        return result;
+    }
+
+    @Override
     public float getHardness() {
         return t.getHardness();
     }

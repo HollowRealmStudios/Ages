@@ -26,10 +26,18 @@ public class TileRenderer extends Module {
                 }
             }
         }
-        tm.setTile(new TileMap(tm), size - 1, size - 1,size - 1);
+        TileMap tm2 = new TileMap(size, size, size);
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                for (int z = 0; z < size; z++) {
+                    tm2.setTile(new GrassTile(), x, y, z);
+                }
+            }
+        }
+        tm.setTile(tm2, size-1, size-1,size-1);
     }
 
     public void render(Graphics2D g) {
-        g.drawImage(tm.getTexture(), 0, 0, null);
+        g.drawImage(tm.getTexture(), 0, 0, config.getWidth(), config.getHeight(), null);
     }
 }
