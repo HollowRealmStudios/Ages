@@ -4,11 +4,11 @@ import simple.engine.Engine;
 
 import java.awt.image.BufferedImage;
 
-public class TestTile extends Tile {
+public class TreeStompVoxel extends Voxel {
 
     @Override
     public BufferedImage getTexture() {
-        return Engine.storageModule.getImage("Pyramid.png");
+        return Engine.storageModule.getImage("TreeStomp.png");
     }
 
     @Override

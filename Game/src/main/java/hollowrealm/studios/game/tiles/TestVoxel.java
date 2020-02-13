@@ -4,11 +4,11 @@ import simple.engine.Engine;
 
 import java.awt.image.BufferedImage;
 
-public class GrassTile extends Tile {
+public class TestVoxel extends Voxel {
 
     @Override
     public BufferedImage getTexture() {
-        return Engine.storageModule.getImage("Grass.png");
+        return Engine.storageModule.getImage("Pyramid.png");
     }
 
     @Override
@@ -18,6 +18,6 @@ public class GrassTile extends Tile {
 
     @Override
     public float getHardness() {
-        return 0.1f;
+        return 1f;
     }
 }
