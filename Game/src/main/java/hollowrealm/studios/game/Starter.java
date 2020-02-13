@@ -1,5 +1,6 @@
 package hollowrealm.studios.game;
 
+import hollowrealm.studios.game.map.MapRotate;
 import hollowrealm.studios.game.map.tiles.GrassVoxel;
 import hollowrealm.studios.game.map.VoxelRenderer;
 import javafx.application.Application;
