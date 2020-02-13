@@ -6,8 +6,10 @@ import java.awt.image.BufferedImage;
  * Created by matteoschmider on 11.02.20.
  */
 public class TileDepthWrapper implements Tile {
-    private Tile t;
-    private int x, y, z;
+    private final Tile t;
+    private final int x;
+    private final int y;
+    private final int z;
 
     public TileDepthWrapper(Tile t, int x, int y, int z) {
         this.t = t;

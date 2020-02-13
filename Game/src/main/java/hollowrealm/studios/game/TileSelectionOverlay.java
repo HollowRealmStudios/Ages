@@ -24,6 +24,6 @@ public class TileSelectionOverlay extends StaticWidget {
 
     @Override
     public void paint(Graphics2D graphics2D) {
-        graphics2D.drawPolygon(new int[] {0, 128, 128, 0}, new int[] {0, 0, 128, 128}, 4);
+        graphics2D.drawPolygon(new int[]{0, 128, 128, 0}, new int[]{0, 0, 128, 128}, 4);
     }
 }

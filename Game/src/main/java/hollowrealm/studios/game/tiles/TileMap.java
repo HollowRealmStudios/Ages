@@ -14,14 +14,14 @@ public class TileMap implements Tile {
     private final int height;
     private final int depth;
 
-    private ArrayList<TileDepthWrapper> depthList;
+    private final ArrayList<TileDepthWrapper> depthList;
 
     public TileMap(int width, int depth, int height) {
         this.width = width;
         this.height = height;
         this.depth = depth;
         tiles = new Tile[width][depth][height];
-        depthList = new ArrayList<TileDepthWrapper>();
+        depthList = new ArrayList<>();
     }
 
     private void fillDepthList() {
@@ -80,6 +80,7 @@ public class TileMap implements Tile {
     private int toScreenX(TileDepthWrapper t) {
         return t.getX() - t.getY();
     }
+
     private int toScreenY(TileDepthWrapper t) {
         return t.getY() + t.getX() - t.getZ() * 2;
     }
@@ -92,7 +93,7 @@ public class TileMap implements Tile {
         int h = ((width / 2 + depth / 2) / 2 + height / 2) * ht;
         BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bi.createGraphics();
-        getTiles().forEach(e->g.drawImage(e.getTexture(), toScreenX(e) * wt/2 + w/2, toScreenY(e) * ht/4 + h/2, wt, ht, null));
+        getTiles().forEach(e -> g.drawImage(e.getTexture(), toScreenX(e) * wt / 2 + w / 2, toScreenY(e) * ht / 4 + h / 2, wt, ht, null));
         return bi;
     }
 

@@ -1,6 +1,5 @@
 package hollowrealm.studios.game;
 
-import com.sun.tools.javadoc.Start;
 import hollowrealm.studios.game.tiles.GrassTile;
 import hollowrealm.studios.game.tiles.TestTile;
 import hollowrealm.studios.game.tiles.TileMap;
@@ -10,10 +9,8 @@ import javafx.stage.Stage;
 import simple.engine.Engine;
 import simple.engine.modules.FrameListener;
 import simple.engine.util.GameConfig;
-import simple.engine.util.Logger;
 
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 
 public class Starter extends Application {
@@ -33,7 +30,7 @@ public class Starter extends Application {
         /*Engine.graphicModule.addFrameListener(new FrameListener() {
             @Override
             public void onNextFrame(Graphics2D graphics2D) {
-                map.paint(graphics2D);
+                graphics2D.drawImage(map.getTexture(), 0, 0, null);
             }
         }, 0);*/
         TileRenderer tr = new TileRenderer(config);
@@ -42,11 +39,11 @@ public class Starter extends Application {
             public void onNextFrame(Graphics2D graphics2D) {
                 tr.render(graphics2D);
             }
-        }, 1);
+        }, 0);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Starter.start(new GameConfig(), new ArrayList<Plugin>());
+    public void start(Stage primaryStage) {
+        Starter.start(new GameConfig(), new ArrayList<>());
     }
 }

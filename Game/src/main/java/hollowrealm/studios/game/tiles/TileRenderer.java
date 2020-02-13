@@ -1,19 +1,15 @@
 package hollowrealm.studios.game.tiles;
 
-import org.javatuples.Pair;
-import org.javatuples.Tuple;
-import simple.engine.gui.WidgetPack;
 import simple.engine.modules.Module;
 import simple.engine.util.GameConfig;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by matteoschmider on 11.02.20.
  */
 public class TileRenderer extends Module {
-    private TileMap tm;
+    private final TileMap tm;
 
     public TileRenderer(GameConfig config) {
         super(config);
@@ -34,7 +30,7 @@ public class TileRenderer extends Module {
                 }
             }
         }
-        tm.setTile(tm2, size-1, size-1,size-1);
+        tm.setTile(tm2, size - 1, size - 1, size - 1);
     }
 
     public void render(Graphics2D g) {

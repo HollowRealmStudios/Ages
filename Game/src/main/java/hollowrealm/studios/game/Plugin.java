@@ -19,24 +19,11 @@ import java.util.Objects;
 public class Plugin {
 
     private final File folder;
-    private String name, author, version, main;
+    private final String name;
+    private final String author;
+    private final String version;
+    private final String main;
     private Class<?> starter;
-
-    @Override
-    public boolean equals(Object o) {
-        if(o instanceof String) {
-            return o.equals(name);
-        }
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Plugin plugin = (Plugin) o;
-        return name.equals(plugin.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
 
     public Plugin(File folder) {
         this.folder = folder;
@@ -50,6 +37,22 @@ public class Plugin {
         } catch (MalformedURLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof String) {
+            return o.equals(name);
+        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plugin plugin = (Plugin) o;
+        return name.equals(plugin.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     public void load() throws MalformedURLException, ClassNotFoundException {
