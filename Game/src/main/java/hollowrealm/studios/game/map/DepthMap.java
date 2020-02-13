@@ -1,4 +1,4 @@
-package hollowrealm.studios.game.tiles;
+package hollowrealm.studios.game.map;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -8,9 +8,9 @@ import java.util.stream.Stream;
  */
 public class DepthMap {
     private final ArrayList<TileDepthWrapper> depthList;
-    private final TileMap tm;
+    private final VoxelMap tm;
 
-    public DepthMap(TileMap tm) {
+    public DepthMap(VoxelMap tm) {
         this.tm = tm;
         depthList = new ArrayList<>();
         for (int x = 0; x < tm.getWidth(); x++) {
@@ -26,7 +26,7 @@ public class DepthMap {
         return depthList.stream();
     }
 
-    public TileMap getCartesianMap() {
+    public VoxelMap getCartesianMap() {
         return this.tm;
     }
 

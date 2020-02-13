@@ -1,7 +1,7 @@
 package hollowrealm.studios.game;
 
-import hollowrealm.studios.game.tiles.GrassTile;
-import hollowrealm.studios.game.tiles.TileRenderer;
+import hollowrealm.studios.game.map.tiles.GrassVoxel;
+import hollowrealm.studios.game.map.VoxelRenderer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import simple.engine.Engine;
@@ -23,11 +23,11 @@ public class Starter extends Application {
         // Logger.disableLevel("fps");
         plugins.forEach(Plugin::start);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> plugins.forEach(Plugin::stop)));
-        TileRenderer tr = new TileRenderer(config);
-        tr.setTile(new GrassTile(), 0, 0, 0);
-        tr.setTile(new GrassTile(), 1, 0, 0);
-        tr.setTile(new GrassTile(), 0, 1, 0);
-        tr.setTile(new GrassTile(), 0, 0, 1);
+        VoxelRenderer tr = new VoxelRenderer(config);
+        tr.setVoxel(new GrassVoxel(), 0, 0, 0);
+        tr.setVoxel(new GrassVoxel(), 1, 0, 0);
+        tr.setVoxel(new GrassVoxel(), 0, 1, 0);
+        tr.setVoxel(new GrassVoxel(), 0, 0, 1);
         Engine.graphicModule.addFrameListener(new FrameListener() {
             @Override
             public void onNextFrame(Graphics2D graphics2D) {
@@ -40,6 +40,7 @@ public class Starter extends Application {
         Engine.keyModule.addKeyListener(KeyEvent.VK_S, () -> p.translate(0, 5));
         Engine.keyModule.addKeyListener(KeyEvent.VK_A, () -> p.translate(-5, 0));
         Engine.keyModule.addKeyListener(KeyEvent.VK_D, () -> p.translate(5, 0));
+        Engine.keyModule.addKeyListener(KeyEvent.VK_ESCAPE, () -> System.exit(0));
         Engine.mouseModule.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void onMouseScroll(int i) {

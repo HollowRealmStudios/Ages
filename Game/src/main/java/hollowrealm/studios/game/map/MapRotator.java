@@ -1,27 +1,8 @@
-package hollowrealm.studios.game.tiles;
+package hollowrealm.studios.game.map;
 
 import java.util.Arrays;
 
 public class MapRotator {
-
-    public static void main(String[] args) {
-        int[][] ints = new int[][]{
-                new int[]{1, 2, 3},
-                new int[]{4, 5, 6},
-                new int[]{7, 8, 9}
-        };
-        System.out.println(arrayToString(ints));
-        System.out.println();
-        ints = rotateCW(ints);
-        System.out.println(arrayToString(ints));
-        System.out.println();
-        rotateMatrix(ints);
-        System.out.println(arrayToString((ints)));
-    }
-
-    private static String arrayToString(int[][] i) {
-        return Arrays.toString(i[0]).concat("\n").concat(Arrays.toString(i[1])).concat("\n").concat(Arrays.toString(i[2]));
-    }
 
     private static int[][] rotateCW(int[][] mat) {
         final int height = mat.length;

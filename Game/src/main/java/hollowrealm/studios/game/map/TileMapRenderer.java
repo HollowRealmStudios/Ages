@@ -1,4 +1,4 @@
-package hollowrealm.studios.game.tiles;
+package hollowrealm.studios.game.map;
 
 import java.awt.*;
 

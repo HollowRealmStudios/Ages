@@ -1,26 +1,26 @@
-package hollowrealm.studios.game.tiles;
+package hollowrealm.studios.game.map;
 
-import hollowrealm.studios.game.Rhomb;
+import hollowrealm.studios.game.map.tiles.Voxel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-public class TileMap implements Tile {
+public class VoxelMap implements Voxel {
 
-    private final Tile[][][] tiles;
+    private final Voxel[][][] tiles;
     private final int width;
     private final int height;
     private final int depth;
 
     private final ArrayList<TileDepthWrapper> depthList;
 
-    public TileMap(int width, int depth, int height) {
+    public VoxelMap(int width, int depth, int height) {
         this.width = width;
         this.height = height;
         this.depth = depth;
-        tiles = new Tile[width][depth][height];
+        tiles = new Voxel[width][depth][height];
         depthList = new ArrayList<>();
     }
 
@@ -28,7 +28,7 @@ public class TileMap implements Tile {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < depth; y++) {
                 for (int z = 0; z < height; z++) {
-                    Tile t = get(x, y, z);
+                    Voxel t = get(x, y, z);
                     if (t != null) {
                         TileDepthWrapper tdw = new TileDepthWrapper(t, x, y, z);
                         if (!depthList.contains(tdw)) {
@@ -40,12 +40,12 @@ public class TileMap implements Tile {
         }
     }
 
-    public void setTile(Tile tile, int x, int y, int z) {
+    public void setTile(Voxel tile, int x, int y, int z) {
         tiles[x][y][z] = tile;
         fillDepthList();
     }
 
-    public Tile get(int x, int y, int z) {
+    public Voxel get(int x, int y, int z) {
         return tiles[x][y][z];
     }
 
@@ -59,18 +59,6 @@ public class TileMap implements Tile {
 
     public int getDepth() {
         return depth;
-    }
-
-    public CollisionMap createCollisionMap() {
-        ArrayList<Rhomb> rhombs = new ArrayList<>();
-        for (int z = 0; z < height; z++) {
-            for (int y = 0; y < depth; y++) {
-                for (int x = 0; x < width; x++) {
-                    //rhombs.add(new Rhomb(x, y, ))
-                }
-            }
-        }
-        return new CollisionMap(rhombs.toArray(new Rhomb[]{}));
     }
 
     public Stream<TileDepthWrapper> getTiles() {

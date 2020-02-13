@@ -1,10 +1,10 @@
-package hollowrealm.studios.game.tiles;
+package hollowrealm.studios.game.map.tiles;
 
 import simple.engine.Engine;
 
 import java.awt.image.BufferedImage;
 
-public class GrassTile implements Tile {
+public class GrassVoxel implements Voxel {
 
     @Override
     public BufferedImage getTexture() {

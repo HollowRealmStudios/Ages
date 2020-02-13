@@ -1,8 +1,8 @@
-package hollowrealm.studios.game.tiles;
+package hollowrealm.studios.game.map.tiles;
 
 import java.awt.image.BufferedImage;
 
-public interface Tile {
+public interface Voxel {
 
     BufferedImage getTexture();
 

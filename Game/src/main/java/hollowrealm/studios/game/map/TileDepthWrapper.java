@@ -1,24 +1,26 @@
-package hollowrealm.studios.game.tiles;
+package hollowrealm.studios.game.map;
+
+import hollowrealm.studios.game.map.tiles.Voxel;
 
 import java.awt.image.BufferedImage;
 
 /**
  * Created by matteoschmider on 11.02.20.
  */
-public class TileDepthWrapper implements Tile {
-    private final Tile t;
+public class TileDepthWrapper implements Voxel {
+    private final Voxel t;
     private final int x;
     private final int y;
     private final int z;
 
-    public TileDepthWrapper(Tile t, int x, int y, int z) {
+    public TileDepthWrapper(Voxel t, int x, int y, int z) {
         this.t = t;
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public Tile getTile() {
+    public Voxel getTile() {
         return t;
     }
 

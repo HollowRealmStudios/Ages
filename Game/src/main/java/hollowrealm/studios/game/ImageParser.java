@@ -1,9 +1,14 @@
 package hollowrealm.studios.game;
 
+import org.imgscalr.Scalr;
+
 import java.awt.*;
 import java.awt.image.*;
 
-public class ImageSplitter {
+/**
+ * @Author NastyGamer
+ */
+public class ImageParser {
 
     public static BufferedImage[] split(BufferedImage image) {
         if (image.getHeight() != 137) {
@@ -13,10 +18,10 @@ public class ImageSplitter {
             g.drawImage(old, 0, 137 - old.getHeight(), null);
         }
         return new BufferedImage[]{
-                image.getSubimage(4, 4, 129, 129),
-                image.getSubimage(141, 4, 129, 129),
-                image.getSubimage(278, 4, 129, 129),
-                image.getSubimage(415, 4, 129, 129)
+                Scalr.resize(image.getSubimage(4, 4, 129, 129), 128, 128),
+                Scalr.resize(image.getSubimage(141, 4, 129, 129), 128, 128),
+                Scalr.resize(image.getSubimage(278, 4, 129, 129), 128, 128),
+                Scalr.resize(image.getSubimage(415, 4, 129, 129), 128, 128)
         };
     }
 

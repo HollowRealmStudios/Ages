@@ -1,8 +1,8 @@
-package hollowrealm.studios.game.tiles;
+package hollowrealm.studios.game.map.tiles;
 
 import java.awt.image.BufferedImage;
 
-public class AirTile implements Tile {
+public class AirVoxel implements Voxel {
 
     @Override
     public BufferedImage getTexture() {
