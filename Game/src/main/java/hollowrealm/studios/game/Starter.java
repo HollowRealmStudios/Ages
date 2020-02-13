@@ -1,39 +1,55 @@
 package hollowrealm.studios.game;
 
+import hollowrealm.studios.game.tiles.GrassTile;
+import hollowrealm.studios.game.tiles.TileRenderer;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import simple.engine.Engine;
 import simple.engine.modules.FrameListener;
+import simple.engine.modules.MouseWheelListener;
 import simple.engine.util.GameConfig;
-import simple.engine.util.Logger;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Starter {
+public class Starter extends Application {
 
-    private static boolean transparent = false;
+    private static float zoom = 1f;
+    private static final Point p = new Point();
 
     public static void start(GameConfig config, ArrayList<Plugin> plugins) {
         Engine.initialize(config);
-        Logger.disableLevel("fps");
-        if (plugins != null) {
-            plugins.forEach(Plugin::start);
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> plugins.forEach(Plugin::stop)));
-        }
-        BufferedImage grass = ImageSplitter.split(Engine.storageModule.getImage("Grass.png"))[0];
-        BufferedImage water = ImageSplitter.split(Engine.storageModule.getImage("Water.png"))[0];
-        BufferedImage bench = ImageSplitter.split(Engine.storageModule.getImage("WorkBench.png"))[0];
-        BufferedImage trans = ImageSplitter.transparize(ImageSplitter.split(Engine.storageModule.getImage("WorkBench.png"))[0]);
+        // Logger.disableLevel("fps");
+        plugins.forEach(Plugin::start);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> plugins.forEach(Plugin::stop)));
+        TileRenderer tr = new TileRenderer(config);
+        tr.setTile(new GrassTile(), 0, 0, 0);
+        tr.setTile(new GrassTile(), 1, 0, 0);
+        tr.setTile(new GrassTile(), 0, 1, 0);
+        tr.setTile(new GrassTile(), 0, 0, 1);
         Engine.graphicModule.addFrameListener(new FrameListener() {
             @Override
             public void onNextFrame(Graphics2D graphics2D) {
-                graphics2D.drawImage(grass, 0, 100, null);
-                graphics2D.drawImage(grass, 64, 132, null);
-                graphics2D.drawImage(water, 0, 37, null);
-                graphics2D.drawImage(transparent ? trans : bench, 64, 69, null);
+                graphics2D.translate(p.x, p.y);
+                graphics2D.scale(zoom, zoom);
+                tr.render(graphics2D);
             }
         }, 0);
-        Engine.keyModule.addKeyListener(KeyEvent.VK_SPACE, () -> transparent = !transparent);
+        Engine.keyModule.addKeyListener(KeyEvent.VK_W, () -> p.translate(0, -5));
+        Engine.keyModule.addKeyListener(KeyEvent.VK_S, () -> p.translate(0, 5));
+        Engine.keyModule.addKeyListener(KeyEvent.VK_A, () -> p.translate(-5, 0));
+        Engine.keyModule.addKeyListener(KeyEvent.VK_D, () -> p.translate(5, 0));
+        Engine.mouseModule.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void onMouseScroll(int i) {
+                zoom += i > 0 ? -0.2f : 0.2f;
+            }
+        });
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        Starter.start(new GameConfig(), new ArrayList<>());
     }
 }

@@ -4,7 +4,7 @@ import simple.engine.Engine;
 
 import java.awt.image.BufferedImage;
 
-public class TestVoxel extends Voxel {
+public class TestTile implements Tile {
 
     @Override
     public BufferedImage getTexture() {

@@ -1,23 +1,21 @@
 package hollowrealm.studios.game.tiles;
 
-import simple.engine.Engine;
-
 import java.awt.image.BufferedImage;
 
-public class BarkTile implements Tile {
+public class AirTile implements Tile {
 
     @Override
     public BufferedImage getTexture() {
-        return Engine.storageModule.getImage("TreeStomp.png");
+        return new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB);
     }
 
     @Override
     public boolean isPassable() {
-        return false;
+        return true;
     }
 
     @Override
     public float getHardness() {
-        return 0.3f;
+        return 0;
     }
 }
