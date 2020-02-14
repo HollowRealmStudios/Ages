@@ -4,15 +4,12 @@ import hollowrealm.studios.game.map.voxels.Voxel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Stream;
 
 public class VoxelMap implements Voxel {
 
     private final int width;
     private final int height;
     private final int depth;
-    private final CopyOnWriteArrayList<VoxelDepthWrapper> depthList;
     private Voxel[][][] voxels;
 
     public VoxelMap(int width, int depth, int height) {
@@ -20,24 +17,6 @@ public class VoxelMap implements Voxel {
         this.height = height;
         this.depth = depth;
         voxels = new Voxel[width][depth][height];
-        depthList = new CopyOnWriteArrayList<>();
-    }
-
-    private void fillDepthList() {
-        depthList.clear();
-        for (int z = 0; z < height; z++) {
-            for (int y = 0; y < depth; y++) {
-                for (int x = 0; x < width; x++) {
-                    Voxel t = get(x, y, z);
-                    if (t != null) {
-                        VoxelDepthWrapper tdw = new VoxelDepthWrapper(t, x, y, z);
-                        if (!depthList.contains(tdw)) {
-                            depthList.add(tdw);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     public void fillLayer(Voxel voxel, int z) {
@@ -46,7 +25,6 @@ public class VoxelMap implements Voxel {
                 setVoxel(voxel, x, y, z);
             }
         }
-        fillDepthList();
     }
 
     public Voxel[][][] getVoxels() {
@@ -55,15 +33,13 @@ public class VoxelMap implements Voxel {
 
     public void setVoxels(Voxel[][][] voxels) {
         this.voxels = voxels;
-        fillDepthList();
     }
 
     public void setVoxel(Voxel voxel, int x, int y, int z) {
         voxels[z][y][x] = voxel;
-        fillDepthList();
     }
 
-    public Voxel get(int x, int y, int z) {
+    public Voxel getVoxel(int x, int y, int z) {
         return voxels[z][y][x];
     }
 
@@ -79,27 +55,28 @@ public class VoxelMap implements Voxel {
         return depth;
     }
 
-    private Stream<VoxelDepthWrapper> streamVoxels() {
-        return depthList.stream();
+    private int toScreenX(int x, int y) {
+        return x - y;
     }
 
-    private int toScreenX(VoxelDepthWrapper t) {
-        return t.getX() - t.getY();
-    }
-
-    private int toScreenY(VoxelDepthWrapper t) {
-        return t.getY() + t.getX() - t.getZ() * 2;
+    private int toScreenY(int x, int y, int z) {
+        return y + x - z * 2;
     }
 
     @Override
     public BufferedImage getTexture() {
-        int wt = depthList.get(0).getTexture().getWidth();
-        int ht = depthList.get(0).getTexture().getHeight();
-        int w = (width / 2 + depth / 2) * wt;
-        int h = ((width / 2 + depth / 2) / 2 + height / 2) * ht;
+        int w = (width / 2 + depth / 2) * 128;
+        int h = ((width / 2 + depth / 2) / 2 + height / 2) * 128;
         BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bi.createGraphics();
-        streamVoxels().forEach(e -> g.drawImage(e.getTexture(), toScreenX(e) * wt / 2 + w / 2, toScreenY(e) * ht / 4 + h / 2, wt, ht, null));
+        for (int z = 0; z < height; z++) {
+            for (int y = 0; y < depth; y++) {
+                for (int x = 0; x < width; x++) {
+                    Voxel v = getVoxel(x, y, z);
+                    g.drawImage(v.getTexture(), toScreenX(x, y) * 128 / 2 + w / 2, toScreenY(x, y, z) * 128 / 4 + h / 2, 128, 128, null);
+                }
+            }
+        }
         return bi;
     }
 
