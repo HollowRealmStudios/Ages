@@ -55,6 +55,14 @@ public class Starter extends Application {
         doStuff();
         ColorOut.print(System.out, "Done at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
         screen.increasePercentage(30);
+        managePlugins(plugins);
+    }
+
+    private static void managePlugins(ArrayList<Plugin> plugins) {
+        if(plugins == null) return;
+        plugins.forEach(Plugin::start);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> plugins.forEach(Plugin::stop)));
+
     }
 
     private static void doStuff() {
