@@ -1,7 +1,9 @@
 package hollowrealm.studios.game;
 
+import hollowrealm.studios.game.map.MapRotate;
 import hollowrealm.studios.game.map.VoxelModule;
 import hollowrealm.studios.game.map.voxels.GrassVoxel;
+import hollowrealm.studios.game.map.voxels.WorkBenchVoxel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import simple.engine.Engine;
@@ -25,6 +27,7 @@ public class Starter extends Application {
 
     private static void doStuff() {
         Engine.get(VoxelModule.class).getMap().fillLayer(new GrassVoxel(), 0);
+        Engine.get(VoxelModule.class).getMap().fillLayer(new WorkBenchVoxel(), 1);
     }
 
     private static void registerGraphics() {
@@ -44,6 +47,8 @@ public class Starter extends Application {
         Engine.keyModule.addKeyListener(KeyEvent.VK_A, () -> Engine.get(PlayerModule.class).player.moveLeft());
         Engine.keyModule.addKeyListener(KeyEvent.VK_D, () -> Engine.get(PlayerModule.class).player.moveRight());
         Engine.keyModule.addKeyListener(KeyEvent.VK_ESCAPE, () -> System.exit(0));
+        Engine.keyModule.addKeyListener(KeyEvent.VK_LEFT, () -> Engine.get(VoxelModule.class).getMap().setVoxels(MapRotate.rotateCW(Engine.get(VoxelModule.class).getMap().getVoxels())));
+        Engine.keyModule.addKeyListener(KeyEvent.VK_RIGHT, () -> Engine.get(VoxelModule.class).getMap().setVoxels(MapRotate.rotateCCW(Engine.get(VoxelModule.class).getMap().getVoxels())));
     }
 
     @Override

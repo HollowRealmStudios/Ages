@@ -4,28 +4,27 @@ import hollowrealm.studios.game.map.voxels.Voxel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Stream;
 
 public class VoxelMap implements Voxel {
 
-    private final Voxel[][][] tiles;
     private final int width;
     private final int height;
     private final int depth;
-
     private final CopyOnWriteArrayList<VoxelDepthWrapper> depthList;
+    private Voxel[][][] voxels;
 
     public VoxelMap(int width, int depth, int height) {
         this.width = width;
         this.height = height;
         this.depth = depth;
-        tiles = new Voxel[width][depth][height];
+        voxels = new Voxel[width][depth][height];
         depthList = new CopyOnWriteArrayList<>();
     }
 
     private void fillDepthList() {
+        depthList.clear();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < depth; y++) {
                 for (int z = 0; z < height; z++) {
@@ -47,15 +46,25 @@ public class VoxelMap implements Voxel {
                 setVoxel(voxel, x, y, z);
             }
         }
+        fillDepthList();
+    }
+
+    public Voxel[][][] getVoxels() {
+        return voxels;
+    }
+
+    public void setVoxels(Voxel[][][] voxels) {
+        this.voxels = voxels;
+        fillDepthList();
     }
 
     public void setVoxel(Voxel voxel, int x, int y, int z) {
-        tiles[x][y][z] = voxel;
+        voxels[x][y][z] = voxel;
         fillDepthList();
     }
 
     public Voxel get(int x, int y, int z) {
-        return tiles[x][y][z];
+        return voxels[x][y][z];
     }
 
     public int getWidth() {
@@ -70,7 +79,7 @@ public class VoxelMap implements Voxel {
         return depth;
     }
 
-    private synchronized Stream<VoxelDepthWrapper> streamVoxels() {
+    private Stream<VoxelDepthWrapper> streamVoxels() {
         return depthList.stream();
     }
 
