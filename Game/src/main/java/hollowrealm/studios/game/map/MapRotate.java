@@ -2,40 +2,40 @@ package hollowrealm.studios.game.map;
 
 import hollowrealm.studios.game.map.voxels.Voxel;
 
-import java.util.Arrays;
-
+//http://blog.icodejava.com/1833/matrix-2d-array-clockwise-and-counterclockwise-rotation-with-extra-buffer-java-implementation/
 public class MapRotate {
 
     public static Voxel[][][] rotateCW(Voxel[][][] voxels) {
-        Arrays.stream(voxels).forEach(MapRotate::rotateCW);
-        return voxels;
-    }
-
-    public static void rotateCW(Voxel[][] voxels) {
-        final int height = voxels.length;
-        final int width = voxels[0].length;
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                voxels[x][height - 1 - y] = voxels[y][x];
-            }
+        for (int i = 0; i < voxels.length; i++) {
+            voxels[i] = rotateCW(voxels[i]);
         }
+        return voxels;
     }
 
     public static Voxel[][][] rotateCCW(Voxel[][][] voxels) {
-        Arrays.stream(voxels).forEach(MapRotate::rotateCCW);
+        for (int i = 0; i < voxels.length; i++) {
+            voxels[i] = rotateCCW(voxels[i]);
+        }
         return voxels;
     }
 
-    public static void rotateCCW(Voxel[][] voxels) {
-        int width = voxels.length;
-        for (int x = 0; x < width / 2; x++) {
-            for (int y = x; y < width - x - 1; y++) {
-                Voxel temp = voxels[x][y];
-                voxels[x][y] = voxels[y][width - 1 - x];
-                voxels[y][width - 1 - x] = voxels[width - 1 - x][width - 1 - y];
-                voxels[width - 1 - x][width - 1 - y] = voxels[width - 1 - y][x];
-                voxels[width - 1 - y][x] = temp;
+    public static Voxel[][] rotateCW(Voxel[][] matrix) {
+        Voxel[][] rotated = new Voxel[matrix[0].length][matrix.length];
+        for (int i = 0; i < matrix[0].length; ++i) {
+            for (int j = 0; j < matrix.length; ++j) {
+                rotated[i][j] = matrix[matrix.length - j - 1][i];
             }
         }
+        return rotated;
+    }
+
+    public static Voxel[][] rotateCCW(Voxel[][] matrix) {
+        Voxel[][] rotated = new Voxel[matrix[0].length][matrix.length];
+        for (int i = 0; i < matrix[0].length; ++i) {
+            for (int j = 0; j < matrix.length; ++j) {
+                rotated[i][j] = matrix[j][matrix[0].length - i - 1];
+            }
+        }
+        return rotated;
     }
 }
