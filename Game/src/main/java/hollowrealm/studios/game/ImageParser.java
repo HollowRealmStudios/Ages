@@ -6,17 +6,19 @@ import java.awt.*;
 import java.awt.image.*;
 
 /**
- * @Author NastyGamer
+ * @author NastyGamer
  */
 public class ImageParser {
 
     public static BufferedImage[] split(BufferedImage image) {
-        if (image.getHeight() != 137) {
+        /*if (image.getHeight() != 137) {
             BufferedImage old = image;
             image = new BufferedImage(image.getWidth(), 137, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = image.createGraphics();
             g.drawImage(old, 0, 137 - old.getHeight(), null);
         }
+        if(image.getWidth() != )*/
+        if(image.getHeight() != 137 || image.getWidth() != 548) image = Scalr.resize(image, 548, 137);
         return new BufferedImage[]{
                 Scalr.resize(image.getSubimage(4, 4, 129, 129), 128, 128),
                 Scalr.resize(image.getSubimage(141, 4, 129, 129), 128, 128),

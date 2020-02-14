@@ -1,4 +1,4 @@
-package hollowrealm.studios.game.map.tiles;
+package hollowrealm.studios.game.map.voxels;
 
 import simple.engine.Engine;
 

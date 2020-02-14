@@ -1,14 +1,14 @@
-package hollowrealm.studios.game.map.tiles;
+package hollowrealm.studios.game.map.voxels;
 
 import simple.engine.Engine;
 
 import java.awt.image.BufferedImage;
 
-public class TreeStompVoxel implements Voxel {
+public class GrassVoxel implements Voxel {
 
     @Override
     public BufferedImage getTexture() {
-        return Engine.storageModule.getImage("TreeStomp.png");
+        return Engine.storageModule.getImage("Grass.png");
     }
 
     @Override
@@ -18,6 +18,6 @@ public class TreeStompVoxel implements Voxel {
 
     @Override
     public float getHardness() {
-        return 1f;
+        return 0.1f;
     }
 }

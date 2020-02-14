@@ -1,6 +1,6 @@
 package hollowrealm.studios.game.map;
 
-import hollowrealm.studios.game.map.tiles.Voxel;
+import hollowrealm.studios.game.map.voxels.Voxel;
 
 public class MapRotate {
 

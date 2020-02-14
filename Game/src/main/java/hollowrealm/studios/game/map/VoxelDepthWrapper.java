@@ -1,19 +1,19 @@
 package hollowrealm.studios.game.map;
 
-import hollowrealm.studios.game.map.tiles.Voxel;
+import hollowrealm.studios.game.map.voxels.Voxel;
 
 import java.awt.image.BufferedImage;
 
 /**
  * Created by matteoschmider on 11.02.20.
  */
-public class TileDepthWrapper implements Voxel {
+public class VoxelDepthWrapper implements Voxel {
     private final Voxel t;
     private final int x;
     private final int y;
     private final int z;
 
-    public TileDepthWrapper(Voxel t, int x, int y, int z) {
+    public VoxelDepthWrapper(Voxel t, int x, int y, int z) {
         this.t = t;
         this.x = x;
         this.y = y;
@@ -51,7 +51,7 @@ public class TileDepthWrapper implements Voxel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TileDepthWrapper that = (TileDepthWrapper) o;
+        VoxelDepthWrapper that = (VoxelDepthWrapper) o;
 
         if (x != that.x) return false;
         if (y != that.y) return false;
