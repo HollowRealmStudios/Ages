@@ -5,22 +5,10 @@ import simple.engine.Engine;
 
 import java.awt.image.BufferedImage;
 
-public class TreeStompVoxel implements Voxel {
+public class TreeStompVoxel extends Voxel {
 
-    BufferedImage texture = ImageParser.split(Engine.storageModule.getImage("TreeStomp.png"))[0];
-
-    @Override
-    public BufferedImage getTexture() {
-        return texture;
+    public TreeStompVoxel() {
+        super(Engine.storageModule.getImage("TreeStomp.png"), false, 0.7f);
     }
 
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    @Override
-    public float getHardness() {
-        return 1f;
-    }
 }

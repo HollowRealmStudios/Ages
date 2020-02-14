@@ -2,20 +2,10 @@ package hollowrealm.studios.game.map.voxels;
 
 import java.awt.image.BufferedImage;
 
-public class AirVoxel implements Voxel {
+public class AirVoxel extends Voxel {
 
-    @Override
-    public BufferedImage getTexture() {
-        return new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB);
+    public AirVoxel() {
+        super(new BufferedImage(128, 128, BufferedImage.TYPE_INT_ARGB), true, 0f);
     }
 
-    @Override
-    public boolean isPassable() {
-        return true;
-    }
-
-    @Override
-    public float getHardness() {
-        return 0;
-    }
 }

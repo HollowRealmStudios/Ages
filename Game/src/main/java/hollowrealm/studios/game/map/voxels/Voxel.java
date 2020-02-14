@@ -1,13 +1,30 @@
 package hollowrealm.studios.game.map.voxels;
 
+import hollowrealm.studios.game.ImageParser;
+
 import java.awt.image.BufferedImage;
 
-public interface Voxel {
+public abstract class Voxel {
 
-    BufferedImage getTexture();
+    private final BufferedImage image;
+    private final boolean passable;
+    private final float hardness;
 
-    boolean isPassable();
+    public Voxel(BufferedImage image, boolean passable, float hardness) {
+        this.image = ImageParser.split(image)[0];
+        this.passable = passable;
+        this.hardness = hardness;
+    }
 
-    float getHardness();
+    public BufferedImage getTexture() {
+        return image;
+    }
 
+    public boolean isPassable() {
+        return passable;
+    }
+
+    public float getHardness() {
+        return hardness;
+    }
 }

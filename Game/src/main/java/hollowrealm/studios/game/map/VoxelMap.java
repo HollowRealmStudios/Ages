@@ -5,7 +5,7 @@ import hollowrealm.studios.game.map.voxels.Voxel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class VoxelMap implements Voxel {
+public class VoxelMap {
 
     private final int width;
     private final int height;
@@ -63,7 +63,6 @@ public class VoxelMap implements Voxel {
         return y + x - z * 2;
     }
 
-    @Override
     public BufferedImage getTexture() {
         int w = (width / 2 + depth / 2) * 128;
         int h = ((width / 2 + depth / 2) / 2 + height / 2) * 128;
@@ -78,15 +77,5 @@ public class VoxelMap implements Voxel {
             }
         }
         return bi;
-    }
-
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    @Override
-    public float getHardness() {
-        return 0;
     }
 }

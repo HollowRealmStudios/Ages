@@ -1,5 +1,6 @@
 package hollowrealm.studios.game;
 
+import com.google.common.base.Stopwatch;
 import hollowrealm.studios.game.map.MapRotate;
 import hollowrealm.studios.game.map.VoxelModule;
 import hollowrealm.studios.game.map.voxels.GrassVoxel;
@@ -10,23 +11,50 @@ import javafx.stage.Stage;
 import simple.engine.Engine;
 import simple.engine.modules.FrameListener;
 import simple.engine.modules.MouseWheelListener;
+import simple.engine.util.ColorOut;
 import simple.engine.util.GameConfig;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Starter extends Application {
 
+    private static final Stopwatch stopwatch = Stopwatch.createStarted();
+    private static final LoadingScreen screen = new LoadingScreen();
     private static float zoom = 1f;
 
     public static void start(GameConfig config, ArrayList<Plugin> plugins) {
         Engine.initialize(config);
         Engine.addModules(new PlayerModule(config));
         Engine.addModules(new VoxelModule(config));
+        ColorOut.print(System.out, "Finished Engine initialization at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
+        screen.increasePercentage(30);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         registerKeys();
+        ColorOut.print(System.out, "Finished registering keys at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
+        screen.increasePercentage(30);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         registerGraphics();
+        ColorOut.print(System.out, "Finished registering graphics at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
+        screen.increasePercentage(30);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         doStuff();
+        ColorOut.print(System.out, "Done at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
+        screen.increasePercentage(30);
     }
 
     private static void doStuff() {
