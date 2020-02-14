@@ -25,19 +25,6 @@ public class VoxelMap implements Voxel {
 
     private void fillDepthList() {
         depthList.clear();
-        /*for (int x = 0; x < width; x++) {
-            for (int y = 0; y < depth; y++) {
-                for (int z = 0; z < height; z++) {
-                    Voxel t = get(x, y, z);
-                    if (t != null) {
-                        VoxelDepthWrapper tdw = new VoxelDepthWrapper(t, x, y, z);
-                        if (!depthList.contains(tdw)) {
-                            depthList.add(tdw);
-                        }
-                    }
-                }
-            }
-        }*/
         for (int z = 0; z < height; z++) {
             for (int y = 0; y < depth; y++) {
                 for (int x = 0; x < width; x++) {

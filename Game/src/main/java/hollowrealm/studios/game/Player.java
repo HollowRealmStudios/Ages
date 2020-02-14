@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
 public class Player implements Drawable {
 
     private final BufferedImage[] images = ImageParser.split(Engine.storageModule.getImage("Player.png"));
+    private final Point position = new Point(0, 0);
     private float speed = 1;
     private boolean inFluid;
-    private final Point position = new Point(0, 0);
 
     public Player() {
     }

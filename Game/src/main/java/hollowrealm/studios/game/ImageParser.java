@@ -2,7 +2,6 @@ package hollowrealm.studios.game;
 
 import org.imgscalr.Scalr;
 
-import java.awt.*;
 import java.awt.image.*;
 
 /**
@@ -11,7 +10,7 @@ import java.awt.image.*;
 public class ImageParser {
 
     public static BufferedImage[] split(BufferedImage image) {
-        if(image.getHeight() != 137 || image.getWidth() != 548) image = Scalr.resize(image, 548, 137);
+        if (image.getHeight() != 137 || image.getWidth() != 548) image = Scalr.resize(image, 548, 137);
         return new BufferedImage[]{
                 Scalr.resize(image.getSubimage(4, 4, 129, 129), 128, 128),
                 Scalr.resize(image.getSubimage(141, 4, 129, 129), 128, 128),
