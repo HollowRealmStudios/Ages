@@ -1,7 +1,6 @@
 package hollowrealm.studios.game;
 
 import com.google.common.base.Stopwatch;
-import hollowrealm.studios.game.map.MapRotate;
 import hollowrealm.studios.game.map.VoxelModule;
 import hollowrealm.studios.game.map.voxels.GrassVoxel;
 import hollowrealm.studios.game.map.voxels.TreeStompVoxel;
@@ -26,11 +25,12 @@ public class Starter extends Application {
     private static float zoom = 1f;
 
     public static void start(GameConfig config, ArrayList<Plugin> plugins) {
+        screen.increasePercentage(20, "Initializing engine");
         Engine.initialize(config);
         Engine.addModules(new PlayerModule(config));
         Engine.addModules(new VoxelModule(config));
         ColorOut.print(System.out, "Finished Engine initialization at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
-        screen.increasePercentage(30);
+        screen.increasePercentage(20, "Registering keys");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -38,7 +38,7 @@ public class Starter extends Application {
         }
         registerKeys();
         ColorOut.print(System.out, "Finished registering keys at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
-        screen.increasePercentage(30);
+        screen.increasePercentage(20, "Registering Graphics");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -46,7 +46,7 @@ public class Starter extends Application {
         }
         registerGraphics();
         ColorOut.print(System.out, "Finished registering graphics at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
-        screen.increasePercentage(30);
+        screen.increasePercentage(20, "Generating world");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -54,12 +54,12 @@ public class Starter extends Application {
         }
         doStuff();
         ColorOut.print(System.out, "Done at ".concat(String.valueOf(stopwatch.elapsed(TimeUnit.MILLISECONDS))), ColorOut.CYAN);
-        screen.increasePercentage(30);
+        screen.increasePercentage(20, "Finishing up");
         managePlugins(plugins);
     }
 
     private static void managePlugins(ArrayList<Plugin> plugins) {
-        if(plugins == null) return;
+        if (plugins == null) return;
         plugins.forEach(Plugin::start);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> plugins.forEach(Plugin::stop)));
 
@@ -89,8 +89,8 @@ public class Starter extends Application {
         Engine.keyModule.addKeyListener(KeyEvent.VK_A, () -> Engine.get(PlayerModule.class).player.moveLeft());
         Engine.keyModule.addKeyListener(KeyEvent.VK_D, () -> Engine.get(PlayerModule.class).player.moveRight());
         Engine.keyModule.addKeyListener(KeyEvent.VK_ESCAPE, () -> System.exit(0));
-        Engine.keyModule.addKeyListener(KeyEvent.VK_LEFT, () -> Engine.get(VoxelModule.class).getMap().setVoxels(MapRotate.rotateCW(Engine.get(VoxelModule.class).getMap().getVoxels())));
-        Engine.keyModule.addKeyListener(KeyEvent.VK_RIGHT, () -> Engine.get(VoxelModule.class).getMap().setVoxels(MapRotate.rotateCCW(Engine.get(VoxelModule.class).getMap().getVoxels())));
+        Engine.keyModule.addKeyListener(KeyEvent.VK_LEFT, () -> Engine.get(VoxelModule.class).getMap().rotateCW());
+        Engine.keyModule.addKeyListener(KeyEvent.VK_RIGHT, () -> Engine.get(VoxelModule.class).getMap().rotateCCW());
         Engine.mouseModule.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void onMouseScroll(int i) {

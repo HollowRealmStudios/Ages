@@ -8,16 +8,19 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 public class LoadingScreen {
 
     private JFrame frame;
-
-    private int percentage = 0;
+    private int percentage;
+    private String current;
 
     public LoadingScreen() {
         Thread t = new Thread(() -> {
             frame = new JFrame() {
                 @Override
                 public void paint(Graphics g) {
+                    g.clearRect(0, 0, 400, 50);
                     g.setColor(Color.PINK);
                     g.fillRect(0, 0, percentage * 4, 50);
+                    g.setColor(Color.BLACK);
+                    g.drawString(current, 200 - g.getFontMetrics().stringWidth(current) / 2, 20);
                 }
             };
             frame.setSize(400, 50);
@@ -31,12 +34,14 @@ public class LoadingScreen {
         t.start();
     }
 
-    public void increasePercentage(int amount) {
+    public void increasePercentage(int amount, String current) {
+        this.current = current;
         percentage += amount;
         if (percentage >= 100) {
             frame.dispose();
             System.gc();
+        } else if (frame != null) {
+            frame.repaint();
         }
-        else frame.repaint();
     }
 }

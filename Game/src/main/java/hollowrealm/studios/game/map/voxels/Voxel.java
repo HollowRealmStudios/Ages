@@ -6,18 +6,20 @@ import java.awt.image.BufferedImage;
 
 public abstract class Voxel {
 
-    private final BufferedImage image;
+    private final BufferedImage[] opaque;
+    private final BufferedImage[] transparent;
     private final boolean passable;
     private final float hardness;
 
     public Voxel(BufferedImage image, boolean passable, float hardness) {
-        this.image = ImageParser.split(image)[0];
+        opaque = ImageParser.split(image);
+        transparent = ImageParser.split(ImageParser.transparize(image));
         this.passable = passable;
         this.hardness = hardness;
     }
 
-    public BufferedImage getTexture() {
-        return image;
+    public BufferedImage getTexture(int rotation, boolean transparent) {
+        return transparent ? this.transparent[rotation] : opaque[rotation];
     }
 
     public boolean isPassable() {
