@@ -5,7 +5,7 @@ import simple.engine.Engine;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Player implements Drawable {
+public class Player {
 
     private final BufferedImage[] images = ImageParser.split(Engine.storageModule.getImage("Player.png"));
     private final Point position = new Point(0, 0);
@@ -39,12 +39,15 @@ public class Player implements Drawable {
         this.speed = speed;
     }
 
-    @Override
     public void paint(Graphics2D g) {
         g.drawImage(images[0], position.x - images[0].getWidth() / 2, position.y - images[0].getHeight() / 2, null);
     }
 
     public Point getPosition() {
         return position;
+    }
+
+    public void setPosition(int x, int y) {
+        position.setLocation(x, y);
     }
 }

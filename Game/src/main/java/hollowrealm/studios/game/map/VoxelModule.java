@@ -1,6 +1,6 @@
 package hollowrealm.studios.game.map;
 
-import hollowrealm.studios.game.map.voxels.AirVoxel;
+import hollowrealm.studios.game.map.voxels.Age;
 import simple.engine.modules.Module;
 import simple.engine.util.GameConfig;
 
@@ -11,26 +11,24 @@ import java.awt.*;
  */
 public class VoxelModule extends Module {
 
-    private final VoxelMap voxelMap;
+    private Age age;
 
-    public VoxelModule(GameConfig config) {
+    public VoxelModule(GameConfig config, Age age) {
         super(config);
-        int size = 5;
-        voxelMap = new VoxelMap(size, size, size);
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                for (int z = 0; z < size; z++) {
-                    voxelMap.setVoxel(new AirVoxel(), x, y, z);
-                }
-            }
-        }
+        this.age = age;
     }
 
-    public VoxelMap getMap() {
-        return voxelMap;
+
+    public Age getAge() {
+        return age;
     }
+
+    public void setAge(Age age) {
+        this.age = age;
+    }
+
 
     public void render(Graphics2D g) {
-        g.drawImage(voxelMap.getTexture(), 0, 0, config.getWidth(), config.getHeight(), null);
+        g.drawImage(age.getVoxelMap().getTexture(), 0, 0, config.getWidth(), config.getHeight(), null);
     }
 }

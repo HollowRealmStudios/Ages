@@ -10,12 +10,15 @@ import java.awt.image.*;
 public class ImageParser {
 
     public static BufferedImage[] split(BufferedImage image) {
-        if (image.getHeight() != 137 || image.getWidth() != 548) image = Scalr.resize(image, 548, 137);
+        if (image.getHeight() != 137 || image.getWidth() != 548) {
+            System.out.println(true);
+            image = Scalr.resize(image, Scalr.Method.SPEED, Scalr.Mode.FIT_EXACT, 548, 137);
+        } else System.out.println(false);
         return new BufferedImage[]{
-                Scalr.resize(image.getSubimage(4, 4, 129, 129), 128, 128),
-                Scalr.resize(image.getSubimage(141, 4, 129, 129), 128, 128),
-                Scalr.resize(image.getSubimage(278, 4, 129, 129), 128, 128),
-                Scalr.resize(image.getSubimage(415, 4, 129, 129), 128, 128)
+                Scalr.resize(image.getSubimage(4, 4, 129, 129), Scalr.Method.SPEED, 128, 128),
+                Scalr.resize(image.getSubimage(141, 4, 129, 129), Scalr.Method.SPEED, 128, 128),
+                Scalr.resize(image.getSubimage(278, 4, 129, 129), Scalr.Method.SPEED, 128, 128),
+                Scalr.resize(image.getSubimage(415, 4, 129, 129), Scalr.Method.SPEED, 128, 128)
         };
     }
 
