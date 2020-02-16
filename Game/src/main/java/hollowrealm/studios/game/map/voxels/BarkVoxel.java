@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class BarkVoxel extends Voxel {
 
-    public BarkVoxel() {
+    BarkVoxel() {
         super(Engine.storageModule.getImage("TreeStomp.png"), false, 0.2f);
     }
 

@@ -4,7 +4,7 @@ import simple.engine.Engine;
 
 public class DebugVoxel extends Voxel {
 
-    public DebugVoxel() {
+    DebugVoxel() {
         super(Engine.storageModule.getImage("Debug.png"), false, 0f);
     }
 }

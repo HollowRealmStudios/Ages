@@ -4,7 +4,7 @@ import simple.engine.Engine;
 
 public class WorkBenchVoxel extends Voxel {
 
-    public WorkBenchVoxel() {
+    WorkBenchVoxel() {
         super(Engine.storageModule.getImage("WorkBench.png"), false, 0.45f);
     }
 }

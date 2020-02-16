@@ -4,7 +4,7 @@ import simple.engine.Engine;
 
 public class GrassVoxel extends Voxel {
 
-    public GrassVoxel() {
+    GrassVoxel() {
         super(Engine.storageModule.getImage("Grass.png"), false, 0.1f);
     }
 }

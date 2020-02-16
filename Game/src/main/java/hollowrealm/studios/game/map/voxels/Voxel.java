@@ -11,7 +11,7 @@ public abstract class Voxel {
     private final boolean passable;
     private final float hardness;
 
-    public Voxel(BufferedImage image, boolean passable, float hardness) {
+    protected Voxel(BufferedImage image, boolean passable, float hardness) {
         opaque = ImageParser.split(image);
         transparent = ImageParser.split(ImageParser.transparize(image));
         this.passable = passable;

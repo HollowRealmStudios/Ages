@@ -4,7 +4,7 @@ import simple.engine.Engine;
 
 public class StoneVoxel extends Voxel {
 
-    public StoneVoxel() {
+    StoneVoxel() {
         super(Engine.storageModule.getImage("Stone.png"), false, 0.4f);
     }
 }

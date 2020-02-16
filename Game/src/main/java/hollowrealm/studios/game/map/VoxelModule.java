@@ -1,6 +1,6 @@
 package hollowrealm.studios.game.map;
 
-import hollowrealm.studios.game.map.voxels.Age;
+import hollowrealm.studios.game.ages.Age;
 import simple.engine.modules.Module;
 import simple.engine.util.GameConfig;
 

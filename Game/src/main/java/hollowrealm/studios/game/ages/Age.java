@@ -1,6 +1,9 @@
-package hollowrealm.studios.game.map.voxels;
+package hollowrealm.studios.game.ages;
 
 import hollowrealm.studios.game.map.VoxelMap;
+import hollowrealm.studios.game.map.VoxelRegistry;
+import hollowrealm.studios.game.map.voxels.AirVoxel;
+import hollowrealm.studios.game.map.voxels.DirtVoxel;
 
 public abstract class Age {
 
@@ -20,7 +23,7 @@ public abstract class Age {
         for (int z = 0; z < getVoxelMap().getHeight(); z++) {
             for (int y = 0; y < getVoxelMap().getDepth(); y++) {
                 for (int x = 0; x < getVoxelMap().getWidth(); x++) {
-                    if (getVoxelMap().getVoxel(x, y, z) == null) getVoxelMap().setVoxel(new AirVoxel(), x, y, z);
+                    if (getVoxelMap().getVoxel(x, y, z) == null) getVoxelMap().setVoxel(VoxelRegistry.getInstance(AirVoxel.class), x, y, z);
                 }
             }
         }

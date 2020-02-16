@@ -1,5 +1,6 @@
-package hollowrealm.studios.game.map.voxels;
+package hollowrealm.studios.game.map;
 
+import hollowrealm.studios.game.ages.Age;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 

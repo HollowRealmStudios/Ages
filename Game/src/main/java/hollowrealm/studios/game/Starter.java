@@ -3,6 +3,7 @@ package hollowrealm.studios.game;
 import com.google.common.base.Stopwatch;
 import hollowrealm.studios.game.ages.TestAge;
 import hollowrealm.studios.game.map.VoxelModule;
+import hollowrealm.studios.game.map.voxels.AirVoxel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import simple.engine.Engine;
