@@ -36,6 +36,7 @@ public class GameTab extends Tab {
                 Launcher.CONFIG.setDefaultVolume((int) Launcher.SETTINGS_TAB.volumeSlider.getValue());
                 ConfigManager.safe(Launcher.CONFIG, new File("Game.config"));
                 stage.close();
+                System.gc();
                 Starter.start(Launcher.CONFIG, Launcher.PLUGIN_MANAGER != null ? Launcher.PLUGIN_MANAGER.getPlugins() : null);
             }
         });
