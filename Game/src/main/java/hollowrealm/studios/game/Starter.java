@@ -14,22 +14,26 @@ import java.util.ArrayList;
 
 public class Starter extends Application {
 
-    private static int gradientCount = 0;
+    private static int currentGradient = 0;
     private static GradientPaint[] gradients = new GradientPaint[50];
 
     public static void start(GameConfig config, ArrayList<Plugin> plugins) {
         Engine.initialize(config);
         Engine.addModules(new PlayerModule(config));
         Engine.addModules(new VoxelModule(config, new TestAge()));
+        createGradients();
+        registerKeys();
+        registerGraphics();
+        doStuff();
+        managePlugins(plugins);
+    }
+
+    private static void createGradients() {
         for (int i = 0; i < 50; i++) {
             int clr = Engine.storageModule.getImage("BackgroundGradient.png").getRGB(i, 0);
             Color color = new Color((clr & 0x00ff0000) >> 16, (clr & 0x0000ff00) >> 8, clr & 0x000000ff);
             gradients[i] = new GradientPaint(Engine.getConfig().getWidth() / 50f * i, 0, color, Engine.getConfig().getWidth() - Engine.getConfig().getWidth() / 50f * i, 5f * Engine.getConfig().getHeight(), Color.WHITE);
         }
-        registerKeys();
-        registerGraphics();
-        doStuff();
-        managePlugins(plugins);
     }
 
     private static void managePlugins(ArrayList<Plugin> plugins) {
@@ -47,15 +51,15 @@ public class Starter extends Application {
         Engine.graphicModule.addFrameListener(new FrameListener() {
             @Override
             public void onNextFrame(Graphics2D graphics2D) {
-                graphics2D.setPaint(gradients[gradientCount]);
+                graphics2D.setPaint(gradients[currentGradient]);
                 graphics2D.fillRect(0, 0, Engine.getConfig().getWidth(), Engine.getConfig().getHeight());
                 Engine.get(VoxelModule.class).render(graphics2D);
-                Engine.get(PlayerModule.class).player.paint(graphics2D);
+                //Engine.get(PlayerModule.class).player.paint(graphics2D);
             }
         }, 0);
         Engine.timingModule.scheduleRepeatedly(() -> {
-            if (gradientCount == 49) gradientCount = 0;
-            else gradientCount++;
+            if (currentGradient == 49) currentGradient = 0;
+            else currentGradient++;
         }, 0, 2000);
     }
 

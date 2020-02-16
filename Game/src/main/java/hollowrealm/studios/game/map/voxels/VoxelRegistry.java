@@ -1,7 +1,6 @@
 package hollowrealm.studios.game.map.voxels;
 
 import com.google.common.annotations.Beta;
-import hollowrealm.studios.game.map.voxels.Voxel;
 import org.reflections.Reflections;
 
 import java.util.HashMap;

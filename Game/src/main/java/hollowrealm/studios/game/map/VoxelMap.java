@@ -1,6 +1,9 @@
 package hollowrealm.studios.game.map;
 
+import hollowrealm.studios.game.map.voxels.AirVoxel;
 import hollowrealm.studios.game.map.voxels.Voxel;
+import hollowrealm.studios.game.map.voxels.VoxelRegistry;
+import simple.engine.Engine;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,19 +13,24 @@ public class VoxelMap {
     private final int width;
     private final int height;
     private final int depth;
+    private final VoxelLayer[] layers;
     private int rotation;
-    private Voxel[][][] voxels;
 
     public VoxelMap(int width, int depth, int height) {
         this.width = width;
         this.height = height;
         this.depth = depth;
-        voxels = new Voxel[width][depth][height];
+        layers = new VoxelLayer[height];
+        for (int y = 0; y < height; y++) {
+            VoxelLayer layer = new VoxelLayer(width, depth);
+            layer.fill(VoxelRegistry.getInstance(AirVoxel.class));
+            layers[y] = layer;
+        }
     }
 
     public void rotateCCW() {
         for (int i = 0; i < height; i++) {
-            voxels[i] = rotateCCW(voxels[i]);
+            layers[i].setVoxels(rotateCCW(layers[i].getVoxels()));
         }
         if (rotation == 0) rotation = 3;
         else rotation--;
@@ -30,7 +38,7 @@ public class VoxelMap {
 
     public void rotateCW() {
         for (int i = 0; i < height; i++) {
-            voxels[i] = rotateCW(voxels[i]);
+            layers[i].setVoxels(rotateCW(layers[i].getVoxels()));
         }
         if (rotation == 3) rotation = 0;
         else rotation++;
@@ -64,20 +72,12 @@ public class VoxelMap {
         }
     }
 
-    public Voxel[][][] getVoxels() {
-        return voxels;
-    }
-
-    public void setVoxels(Voxel[][][] voxels) {
-        this.voxels = voxels;
-    }
-
     public void setVoxel(Voxel voxel, int x, int y, int z) {
-        voxels[z][y][x] = voxel;
+        layers[y].setVoxel(voxel, x, z);
     }
 
     public Voxel getVoxel(int x, int y, int z) {
-        return voxels[z][y][x];
+        return layers[y].get(x, z);
     }
 
     public int getWidth() {
@@ -103,16 +103,18 @@ public class VoxelMap {
     public BufferedImage getTexture() {
         int w = (width / 2 + depth / 2) * 128;
         int h = ((width / 2 + depth / 2) / 2 + height / 2) * 128;
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bi = new BufferedImage(Engine.getConfig().getWidth(), Engine.getConfig().getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bi.createGraphics();
-        for (int z = 0; z < height; z++) {
-            for (int y = 0; y < depth; y++) {
+        /*for (int y = 0; y < height; y++) {
+            for (int z = 0; z < depth; z++) {
                 for (int x = 0; x < width; x++) {
                     Voxel v = getVoxel(x, y, z);
-                    g.drawImage(v.getTexture(rotation, false), toScreenX(x, y) * 128 / 2 + w / 2, toScreenY(x, y, z) * 128 / 4 + h / 2, 128, 128, null);
+                    System.out.println(String.format("%d,%d", toScreenX(x, y) * 128 / 2 + w / 2, toScreenY(x, y, z) * 128 / 4 + h / 2));
+                    g.drawImage(v.getTexture(rotation, false), toScreenX(x, y) * 128 / 2 + w / 2, toScreenY(x, y, z) * 128 / 4 + h / 2, null);
                 }
             }
-        }
+        }*/
+
         return bi;
     }
 }

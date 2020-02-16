@@ -12,12 +12,13 @@ import java.awt.*;
 public class VoxelModule extends Module {
 
     private Age age;
+    private float zoom = 1f;
+    private Point translation = new Point();
 
     public VoxelModule(GameConfig config, Age age) {
         super(config);
         this.age = age;
     }
-
 
     public Age getAge() {
         return age;
@@ -26,7 +27,6 @@ public class VoxelModule extends Module {
     public void setAge(Age age) {
         this.age = age;
     }
-
 
     public void render(Graphics2D g) {
         g.drawImage(age.getVoxelMap().getTexture(), 0, 0, config.getWidth(), config.getHeight(), null);
