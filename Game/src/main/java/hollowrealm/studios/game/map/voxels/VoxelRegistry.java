@@ -1,4 +1,4 @@
-package hollowrealm.studios.game.map;
+package hollowrealm.studios.game.map.voxels;
 
 import com.google.common.annotations.Beta;
 import hollowrealm.studios.game.map.voxels.Voxel;
@@ -13,7 +13,13 @@ public class VoxelRegistry {
     @Beta
     public static void registerAll() {
         Reflections reflections = new Reflections();
-        reflections.getSubTypesOf(Voxel.class).forEach(System.out::println);
+        reflections.getSubTypesOf(Voxel.class).forEach(c -> {
+            try {
+                voxels.put(c, c.newInstance());
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public static void registerVoxel(Class<? extends Voxel> v) {
@@ -27,8 +33,8 @@ public class VoxelRegistry {
     }
 
     public static Voxel getInstance(Class<? extends Voxel> v) {
-        if(voxels.size() == 0) {
-            System.out.println("No voxels were registered before accessing them. Falling back to automatic registration");
+        if (voxels.size() == 0) {
+            System.err.println("No voxels were registered before accessing them. Falling back to automatic registration");
             registerAll();
         }
         return voxels.get(v);

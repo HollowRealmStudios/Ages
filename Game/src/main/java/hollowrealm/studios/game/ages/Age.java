@@ -1,9 +1,8 @@
 package hollowrealm.studios.game.ages;
 
 import hollowrealm.studios.game.map.VoxelMap;
-import hollowrealm.studios.game.map.VoxelRegistry;
+import hollowrealm.studios.game.map.voxels.VoxelRegistry;
 import hollowrealm.studios.game.map.voxels.AirVoxel;
-import hollowrealm.studios.game.map.voxels.DirtVoxel;
 
 public abstract class Age {
 

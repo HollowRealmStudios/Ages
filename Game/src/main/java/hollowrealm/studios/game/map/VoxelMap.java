@@ -58,7 +58,7 @@ public class VoxelMap {
 
     public void fillLayer(Voxel voxel, int z) {
         for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+            for (int y = 0; y < depth; y++) {
                 setVoxel(voxel, x, y, z);
             }
         }

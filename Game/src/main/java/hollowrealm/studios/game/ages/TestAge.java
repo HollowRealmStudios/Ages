@@ -1,12 +1,12 @@
 package hollowrealm.studios.game.ages;
 
-import hollowrealm.studios.game.map.VoxelRegistry;
+import hollowrealm.studios.game.map.voxels.VoxelRegistry;
 import hollowrealm.studios.game.map.voxels.*;
 
 public class TestAge extends Age {
 
     public TestAge() {
-        super(5, 5, 5);
+        super(7, 7, 7);
     }
 
     @Override
