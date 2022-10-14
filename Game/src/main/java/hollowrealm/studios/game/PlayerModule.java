@@ -5,10 +5,10 @@ import simple.engine.util.GameConfig;
 
 public class PlayerModule extends Module {
 
-    public final Player player;
+	public final Player player;
 
-    public PlayerModule(GameConfig config) {
-        super(config);
-        player = new Player();
-    }
+	public PlayerModule(GameConfig config) {
+		super(config);
+		player = new Player();
+	}
 }
