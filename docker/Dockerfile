@@ -1,7 +1,8 @@
-FROM bellsoft/liberica-openjdk-debian:8
+FROM maven:3.8.6-amazoncorretto-8
 
-ADD . /done
+ADD . /project
+WORKDIR /project
 
-EXPOSE 21
+RUN mvn clean package
 
-RUN apt update && apt upgrade -y && apt install maven git lftp -y && git clone https://github.com/HollowRealmStudios/Ages && cd Ages && mvn install && cd target && ls
+#TODO add entrypoint -> Somehow show docker window on host? -> Maybe X11 passthrough?
