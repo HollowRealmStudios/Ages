@@ -13,16 +13,16 @@
 
     <repositories>
         <repository>
-            <id>JonasMohr.xyz</id>
-            <url>https://jonasmohr.xyz/maven</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>org.nastygamer</groupId>
+            <groupId>com.github.MohrJonas</groupId>
             <artifactId>SimpleEngine</artifactId>
-            <version>LATEST</version>
+            <version>02bac972ce</version>
         </dependency>
         <dependency>
             <groupId>org.jgrapht</groupId>
